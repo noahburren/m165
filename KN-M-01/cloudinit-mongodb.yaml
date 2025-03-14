@@ -1,0 +1,48 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa MIIEpAIBAAKCAQEA8ff3sswERpURe4Ib61w4N4L8U4zB6lWBiomHoavB+a6XbRI/jaR4xxcbKq7dknt1Vulinmj+y76Sf4DDRKWqy01sGRQeEP2NQ1OtdArZA/WXrGQFyJFcougo/YsUZ21KsioT5fJOWfn68OJs3QRsk5aXAkJAURmkkf7sU3ahMoXFKz6025bheMVLmH0D+LI2mTwGQgf+W6qL+KZlv6MyPJtQjtuY2Y1bSd6KT8+sKqC2WPrl/mrISDarHsWZ0SYZGaBVOdY+r2cLkCzBtBKk0UAc49ZW113rSHu8nwCk8iMxNQ6GCyrKkKdCmtLw3j/2qfYBSPQRebyf0ky+9f0fhwIDAQABAoIBABW9MYPe0IOG4Qs3pUp//oz+N61J+CIVjI3lzUm5JLRJ+1DRUuRm4nMAoHA1RbLjZKdqUHHq/PlRJdhOuTxxpeaeDhgytoDQRuDFo8/JKbYxWm8ijWJ3rNr2ALjGxg6EwzE+losSOffbfbAmp6EzxI19+hM54I1owGBdht34yoK/VT7R3cRP5vLRClJKHkWGMejLhMzTpcSVuUHY2pLScSbh58uSsybHx5CdlngKz2XpGiBhwdUHWqpmSKuiXKF6IPbyvFxqe8GepGutTMSk6SpUzKSZLApZA2O7gKnknzIQrn6Vyyhcnk0A8AOQCRosUU0ODPhRdNpJS/h0U5uQqAECgYEA+QYscaSAuqdy44TZ6j/xt05IpRbxYVomGvYHTH8SiV2xQo2tjpxTJbzHYtWyQZuwv5m4L6lTo2dpoQt1y22l1NInRXLI+Dkf8mCYuYSYR0RWjxUcE1QJRbJ48WdRzna78kB2tjs2MRqJ6UNiI/ADLqL5rhZgGF/lZSPwnKa3y+MCgYEA+L8yaTUZ1gD5fM0u5vRiQtCgs5aMENJotYz26AyFWz96HLkSRPUZleG8aVG2It/1hwfJko8gM2kbg7suDjjFucwue6P4vvqx91iMAzs7KASnKeuxMUXkvsVdCZd0AgRzvkqq3c453//jCzucxYe9rH1GUuuwnifVkN2mvXHeNw0CgYEAjbkXvi1zHceCuT24j3qI5FvnOB2Qjmkx2pI+oSiIsijiYxAiwFDzeTyw9OzNoE0tED459tYVRZ/rG75b8cSbZj2cIAgtnCdWqSiUgrCVwamA4bmP2uguxr3F2w2EH06vtDU/2oJkWxnRdzHkPrOv+/DAzHTrh7O76A3GOEEhxSUCgYEAzcv53Bsntet2fi+Px1qXVSogWpSKa3x5TwNCX7fEOTsqP0tK9yxFL8DkTcphwzbBfycNOSka/g3Oysz5DKEhzVdFeduud+sXhEmJBT9i8PfwiXlLTzXBS6gkEkRwoR6n198UwI/XSCD/6hI24SIt5eB7Zy1CIYdZZRJM2l2z+J0CgYBZoeyy+FegpIVTr12ti4bjwmnH0u6hgWP4C0eLnOJMAJbprYIo70uPO+CNTvGPhfglJjBP6cmVBTz+ybZ2edFxw2/aFylq6coLYVH4nHUpULaWE8oXIc8F5XrSSRLTFXT1GeY5pdUu39Dd9IFafmFDIkLIH7FioUjFhdhq+SyMxw== personal-key
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCPIIO8uY8oWIihDv0tCAbX6toyG1RYkaLZyfGD1L+I07K4CnwAVBSU+81vw3Yv5sN9tj2Ccve9kzEeCNMld2mDP/Tt7edkx2MCToVfVx+njqwY/XbMY9bfdRKJLhIoLavuVNLnnkSIXdtlGr3JF71hPHzBDMEo64ofPCQ8hPsGxL1u3efb12jcWcRhudKtv7Qh6cVE47Zj4xImfi6VlLqwzcKZ5oCqR/z1hLLL+/pS3eM5Qsor5wmAqNfH4+z5eE+pOkFm7a0Nkygv9jwXIqtJzFGKYDe6ciBD04pEovdvY0FTyiv2vksQOVgjtu2faG2Iv1HOG0JktCIwJ49OEgjT teacher-key
+ssh_pwauth: false
+disable_root: false
+package_update: true
+packages:
+  - unzip
+  - gnupg
+  - curl
+write_files:
+  - path: /home/ubuntu/mongodconfupdate.sh
+    content: |
+      sudo sed -i 's/#security:/security:\n  authorization: enabled/g' /etc/mongod.conf
+  - path: /home/ubuntu/mongodbuser.txt
+    content: |
+      use admin;
+      db.createUser(
+        {
+          user: "admin",
+          pwd: "password",
+          roles: [
+            { role: "userAdminAnyDatabase", db: "admin" },
+            { role: "readWriteAnyDatabase", db: "admin" }
+          ]
+        }
+      );
+
+runcmd:
+  - curl -fsSL https://pgp.mongodb.com/server-6.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor
+  - echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+  - sudo apt-get update -y
+  - sudo apt-get install -y mongodb-org
+  - sudo sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
+  - sudo chmod +x /home/ubuntu/mongodconfupdate.sh
+  - sudo /home/ubuntu/mongodconfupdate.sh
+  - sudo systemctl enable mongod
+  - sudo systemctl start mongod
+  - sudo sleep 3
+  - sudo mongosh < /home/ubuntu/mongodbuser.txt
+  - sudo systemctl restart mongod

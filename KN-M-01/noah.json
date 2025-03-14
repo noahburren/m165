@@ -1,0 +1,7 @@
+{
+    "_id": { "$oid": "63e47f15e3b1f7c93c1a1234" },
+    "adresse": "Katzenbachstrasse 41, 8052 Zürich",
+    "größe": 1.79,
+    "geburtsdatum": { "$date": "2007-08-25T00:00:00Z" }
+  }
+  
