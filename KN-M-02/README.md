@@ -2,6 +2,8 @@
 ## Erklärungen zu den Entitäten und Beziehungen
 ### Entitäten:
 
+![Drawio](A.png)
+
 **1. Spieler**
 - Enthält Informationen über Baseballspieler.
 - Attribute: ID (Primärschlüssel), Name, Position (z. B. Pitcher, Catcher), Geburtsdatum, Team_ID (Fremdschlüssel zu Team).
@@ -47,3 +49,19 @@ Ein Spieler kann an mehreren Spielen teilnehmen.
 Wird durch die Zwischentabelle Spiel_Spieler umgesetzt.
 
 ---
+
+# B) Logisches Datenmodell
+![Drawio Logisch](B.png)
+
+## Meine Verschachtelung (Referenzierung)
+
+In meinem logischen Datenmodell habe ich bewusst keine Verschachtelung verwendet, sondern mich für die Referenzierung entschieden. Das bedeutet, dass jede Entität (z. B. Spieler, Team, Trainer, Spiel) in einer eigenen Collection gespeichert wird und Beziehungen über IDs hergestellt werden.
+
+## Wieso Referenzierung
+
+| Vorteil    | Erklärung |
+| -------- | ------- |
+| Trennung der Verantwortung	  | Spieler, Trainer und Teams können separat gepflegt werden.    |
+| Reduzierung von Redundanz	 | Ein Spieler, der an mehreren Spielen teilnimmt, muss nicht mehrfach gespeichert werden.    |
+| Skalierbarkeit    | Keine Probleme mit Dokumentgröße bei vielen Spielern oder Spielen.    |
+
