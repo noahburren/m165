@@ -53,15 +53,15 @@ Wird durch die Zwischentabelle Spiel_Spieler umgesetzt.
 # B) Logisches Datenmodell
 ![Drawio Logisch](B.png)
 
-## Meine Verschachtelung (Referenzierung)
+## Meine Verschachtelung
 
-In meinem logischen Datenmodell habe ich bewusst keine Verschachtelung verwendet, sondern mich für die Referenzierung entschieden. Das bedeutet, dass jede Entität (z. B. Spieler, Team, Trainer, Spiel) in einer eigenen Collection gespeichert wird und Beziehungen über IDs hergestellt werden.
+|Entität|	Verschachtelt oder referenziert?	|Grund|
+| ----------- | ------------------ | ------------- |
+|Spieler in Team|	Eingebettet	|Spieler gehören logisch zu einem Team und werden oft gemeinsam abgefragt.|
+|Trainer in Team|	Referenziert|	Trainer kann mehrere Teams haben, Änderungen sollten einfach sein.|
+|Teams in Spiel|	Referenziert|	Teams existieren unabhängig und treten in mehreren Spielen auf.|
+|Spieler in Spiel|	Eingebettet|	Spieler pro Spiel variieren; direkte Speicherung erleichtert Abfragen.|
 
-## Wieso Referenzierung
 
-| Vorteil    | Erklärung |
-| -------- | ------- |
-| Trennung der Verantwortung	  | Spieler, Trainer und Teams können separat gepflegt werden.    |
-| Reduzierung von Redundanz	 | Ein Spieler, der an mehreren Spielen teilnimmt, muss nicht mehrfach gespeichert werden.    |
-| Skalierbarkeit    | Keine Probleme mit Dokumentgröße bei vielen Spielern oder Spielen.    |
-
+## Warum Verschachtelung
+MongoDB nutzt NoSQL-Dokumentenstrukturen, die es ermöglichen, Daten in verschachtelten (eingebetteten) Dokumenten statt mit relationalen Tabellen zu speichern.
