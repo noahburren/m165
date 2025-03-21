@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1">
+    <mxGraphModel dx="1071" dy="633" grid="1" gridsize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" value="" style="group" vertex="1" connectable="0">
+          <mxGeometry x="0" y="0" width="827" height="1169" as="geometry"/>
+        </mxCell>
+        <mxCell id="1" value="" style="group" vertex="1" connectable="0">
+          <mxGeometry width="827" height="1169" as="geometry"/>
+        </mxCell>
+        <mxCell id="2" value="Spieler" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cfe2f3;strokeColor=#2e6a85;rounded=1;" vertex="1" connectable="1">
+          <mxGeometry x="150" y="200" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="3" value="Team" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cfe2f3;strokeColor=#2e6a85;rounded=1;" vertex="1" connectable="1">
+          <mxGeometry x="300" y="200" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="4" value="Spiel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cfe2f3;strokeColor=#2e6a85;rounded=1;" vertex="1" connectable="1">
+          <mxGeometry x="450" y="200" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="5" value="Trainer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cfe2f3;strokeColor=#2e6a85;rounded=1;" vertex="1" connectable="1">
+          <mxGeometry x="600" y="200" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="6" value="HatTeilgenommen" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="2" target="4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="7" value="Besitzt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
