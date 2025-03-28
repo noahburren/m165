@@ -24,10 +24,6 @@
 - Ein Spiel kann mehrere Teams haben, und ein Team kann an mehreren Spielen teilnehmen.
 - Attribute: Spiel_ID (Fremdschlüssel zu Spiel), Team_ID (Fremdschlüssel zu Team).
 
-**6. Spiel_Spieler (Zwischentabelle für N:M-Beziehung zwischen Spieler und Spiel)**
-- Ein Spieler kann an mehreren Spielen teilnehmen, und ein Spiel hat mehrere Spieler.
-- Attribute: Spiel_ID (Fremdschlüssel zu Spiel), Spieler_ID (Fremdschlüssel zu Spieler).
-
 ## Beziehungen:
 
 **1. Spieler → Team (N:1)**
@@ -43,11 +39,6 @@ Ein Spiel kann mehrere Teams beinhalten (Heim- und Auswärtsteam).
 Ein Team kann an mehreren Spielen teilnehmen.
 Wird durch die Zwischentabelle Spiel_Team umgesetzt.
 
-**4. Spiel ↔ Spieler (N:M)**
-Ein Spiel hat mehrere Spieler (alle Teammitglieder, die spielen).
-Ein Spieler kann an mehreren Spielen teilnehmen.
-Wird durch die Zwischentabelle Spiel_Spieler umgesetzt.
-
 ---
 
 # B) Logisches Datenmodell
@@ -60,7 +51,6 @@ Wird durch die Zwischentabelle Spiel_Spieler umgesetzt.
 |Spieler in Team|	Eingebettet	|Spieler gehören logisch zu einem Team und werden oft gemeinsam abgefragt.|
 |Trainer in Team|	Referenziert|	Trainer kann mehrere Teams haben, Änderungen sollten einfach sein.|
 |Teams in Spiel|	Referenziert|	Teams existieren unabhängig und treten in mehreren Spielen auf.|
-|Spieler in Spiel|	Eingebettet|	Spieler pro Spiel variieren; direkte Speicherung erleichtert Abfragen.|
 
 
 ## Warum Verschachtelung
