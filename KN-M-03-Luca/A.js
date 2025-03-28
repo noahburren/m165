@@ -1,7 +1,3 @@
-// Verbindung zur Datenbank herstellen
-use baseballDB;
-
-// IDs als Variablen definieren
 let team1 = ObjectId();
 let team2 = ObjectId();
 let player1 = ObjectId();
@@ -12,13 +8,11 @@ let coach2 = ObjectId();
 let game1 = ObjectId();
 let game2 = ObjectId();
 
-// Collections erstellen
 db.createCollection("teams");
 db.createCollection("players");
 db.createCollection("coaches");
 db.createCollection("games");
 
-// Teams einfügen (insertMany)
 db.teams.insertMany([
     {
         _id: team1,
@@ -36,7 +30,6 @@ db.teams.insertMany([
     }
 ]);
 
-// Spieler einfügen (insertMany)
 db.players.insertMany([
     {
         _id: player1,
@@ -58,7 +51,6 @@ db.players.insertMany([
     }
 ]);
 
-// Trainer einfügen (insertOne)
 db.coaches.insertOne({
     _id: coach1,
     name: "Coach Adams",
@@ -71,7 +63,6 @@ db.coaches.insertOne({
     license: "B"
 });
 
-// Spiele einfügen (insertMany)
 db.games.insertMany([
     {
         _id: game1,
