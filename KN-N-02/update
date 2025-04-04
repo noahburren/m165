@@ -1,0 +1,14 @@
+MATCH (t:Team {name: "New York Yankees"})
+SET t.name = "New York Legends"
+RETURN t;
+
+MATCH (s:Spieler {name: "Aaron Judge"})
+SET s.position = "First Baseman", s.nationalität = "USA"
+RETURN s;
+
+MATCH (t:Team {name: "New York Legends"})<-[:TRAINIERT]-(oldTrainer:Trainer)
+CREATE (:Trainer {name: "Joe Smith", trainer_id: 203, geburtsdatum: "1980-05-15"});
+MATCH (newTrainer:Trainer {name: "Joe Smith"})
+DELETE oldTrainer
+CREATE (newTrainer)-[:TRAINIERT]->(t)
+RETURN t, newTrainer;

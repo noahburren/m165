@@ -1,0 +1,5 @@
+MATCH (s:Spieler {spieler_id: 101})
+DELETE s;
+
+MATCH (s:Spieler {spieler_id: 101})
+DETACH DELETE s;
