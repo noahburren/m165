@@ -1,4 +1,4 @@
-# A Daten erstellen (Create)
+# A) Daten hinzufügen (20%)
 
 ```
 CREATE
@@ -26,7 +26,7 @@ CREATE
 
 ---
 
-# B Daten abfragen (Read)
+# B) Daten abfragen (20%)
 
 
 ## Alle Knoten und Beziehungen auslesen
@@ -65,7 +65,7 @@ RETURN s.name, s.geburtsdatum, t.name;
 
 ---
 
-# C Daten löschen (Delete)
+# C) Daten löschen (20%)
 
 ## Spieler ohne DETACH DELETE löschen (führt zu Fehlern, falls Beziehungen bestehen)
 ```
@@ -81,7 +81,7 @@ DETACH DELETE s;
 
 ---
 
-# D Daten aktualisieren (Update)
+# D) Daten verändern (20%)
 
 ## Team-Namen aktualisieren
 ```
@@ -105,3 +105,23 @@ DELETE oldTrainer
 CREATE (newTrainer)-[:TRAINIERT]->(t)
 RETURN t, newTrainer;
 ```
+---
+# E Zusätzliche Klauseln (20%)
+## Erklärung
+``MERGE`` stellt sicher, dass ein Knoten oder eine Beziehung nur dann erstellt wird, wenn sie noch nicht existiert. Falls der Knoten oder die Beziehung bereits vorhanden ist, wird nichts geändert.
+## ANwendungsfall
+Angenommen, wir möchten sicherstellen, dass das Team „Boston Red Sox“ nur einmal in der Datenbank existiert, egal ob das Skript mehrmals ausgeführt wird.
+## Beispiel 1
+
+```
+MERGE (t:Team {name: "Boston Red Sox", city: "Boston"})
+RETURN t;
+```
+Falls „Boston Red Sox“ bereits existiert, passiert nichts. Falls nicht, wird es erstellt.
+
+## Beispiel 2
+```
+MATCH (p:Spieler {name: "Mookie Betts"}), (t:Team {name: "Boston Red Sox"})
+MERGE (p)-[:GEHOERT_ZU]->(t);
+```
+Falls Mookie Betts bereits mit dem Team verknüpft ist, wird keine doppelte Beziehung erstellt.
