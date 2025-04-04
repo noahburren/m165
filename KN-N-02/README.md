@@ -107,11 +107,12 @@ RETURN t, newTrainer;
 ```
 ---
 # E Zusätzliche Klauseln (20%)
-## Erklärung
+## Merge
+### Erklärung
 ``MERGE`` stellt sicher, dass ein Knoten oder eine Beziehung nur dann erstellt wird, wenn sie noch nicht existiert. Falls der Knoten oder die Beziehung bereits vorhanden ist, wird nichts geändert.
-## ANwendungsfall
+### ANwendungsfall
 Angenommen, wir möchten sicherstellen, dass das Team „Boston Red Sox“ nur einmal in der Datenbank existiert, egal ob das Skript mehrmals ausgeführt wird.
-## Beispiel 1
+### Beispiel 1
 
 ```
 MERGE (t:Team {name: "Boston Red Sox", city: "Boston"})
@@ -119,9 +120,37 @@ RETURN t;
 ```
 Falls „Boston Red Sox“ bereits existiert, passiert nichts. Falls nicht, wird es erstellt.
 
-## Beispiel 2
+### Beispiel 2
 ```
 MATCH (p:Spieler {name: "Mookie Betts"}), (t:Team {name: "Boston Red Sox"})
 MERGE (p)-[:GEHOERT_ZU]->(t);
 ```
 Falls Mookie Betts bereits mit dem Team verknüpft ist, wird keine doppelte Beziehung erstellt.
+
+---
+
+## Foreach
+### Erklärung
+``FOREACH`` wird verwendet, um Operationen für jede einzelne Komponente einer Liste auszuführen. Das ist nützlich, wenn du mehrere Knoten oder Beziehungen in einem Schritt ändern möchtest.
+### Anwendungsfall
+Wir wollen eine Liste von Spielern auf einmal zu einem Team hinzufügen.
+
+### Beispiel 1
+
+```
+MATCH (t:Team {name: "New York Yankees"})  
+WITH t, ["Derek Jeter", "Alex Rodriguez", "Mariano Rivera"] AS spielerListe  
+FOREACH (spielerName IN spielerListe |  
+    MERGE (s:Spieler {name: spielerName})  
+    MERGE (s)-[:GEHOERT_ZU]->(t)  
+);
+```
+- Wir definieren eine Liste mit Spielernamen.
+
+- Für jeden Namen in der Liste:
+
+    - Falls der Spieler nicht existiert, wird er erstellt.
+
+    - Falls die Beziehung nicht existiert, wird sie hinzugefügt.
+
+- So können wir mehrere Spieler mit einer einzigen Abfrage zu einem Team hinzufügen.
