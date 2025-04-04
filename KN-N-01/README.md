@@ -3,4 +3,3 @@
 # B) Logisches Modell für Neo4j (70%)
 ![Model](model.png)
 
-

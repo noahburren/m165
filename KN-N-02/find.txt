@@ -1,0 +1,19 @@
+MATCH (s:Spieler)-[:GEHOERT_ZU]->(t:Team)
+WHERE t.name = "New York Yankees"
+RETURN s.name, s.position, t.name;
+
+MATCH (sp:Spiel)
+WHERE sp.ort = "Yankee Stadium"
+RETURN sp.spiel_id, sp.datum, sp.ort;
+
+MATCH (sp:Spiel)
+WHERE sp.ort = "Yankee Stadium"
+RETURN sp.spiel_id, sp.datum, sp.ort;
+
+MATCH (t:Team)
+OPTIONAL MATCH (t)<-[:TRAINIERT]-(tr:Trainer)
+RETURN t.name AS Team, tr.name AS Trainer;
+
+MATCH (s:Spieler)-[:GEHOERT_ZU]->(t:Team)
+WHERE date(s.geburtsdatum) < date("1995-01-01")
+RETURN s.name, s.geburtsdatum, t.name;
