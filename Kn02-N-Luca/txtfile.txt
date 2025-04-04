@@ -1,0 +1,21 @@
+CREATE
+    (team1:Team {team_id: 1, name: "Chicago Cubs", city: "Chicago"}),
+    (team2:Team {team_id: 2, name: "Boston Red Sox", city: "Boston"}),
+
+    (player1:Spieler {spieler_id: 101, name: "Amir", position: "Outfielder", geburtsdatum: "2007-09-1"}),
+    (player2:Spieler {spieler_id: 102, name: "Luca", position: "Outfielder", geburtsdatum: "2007-09-24"}),
+
+    (trainer1:Trainer {trainer_id: 201, name: "Levin", Erfahrung: 90}),
+    (trainer2:Trainer {trainer_id: 202, name: "Dave", Erfahrung: 80}),
+
+    (game1:Spiel {spiel_id: 301, datum: "2024-06-14", ort: "Boston Stadium"}),
+    (game2:Spiel {spiel_id: 302, datum: "2024-02-11", ort: "Chicago Stadium"}),
+
+    (player1)-[:GEHOERT_ZU]->(team1),
+    (player2)-[:GEHOERT_ZU]->(team2),
+
+    (trainer1)-[:TRAINIERT]->(team1),
+    (trainer2)-[:TRAINIERT]->(team2),
+
+    (team1)-[:SPIELT_IN]->(game1),
+    (team2)-[:SPIELT_IN]->(game2);
