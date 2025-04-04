@@ -23,6 +23,7 @@ CREATE
     (team1)-[:SPIELT_IN]->(game1),
     (team2)-[:SPIELT_IN]->(game2);
 ```
+![create](create.png)
 
 ---
 
@@ -62,6 +63,8 @@ MATCH (s:Spieler)-[:GEHOERT_ZU]->(t:Team)
 WHERE date(s.geburtsdatum) < date("1995-01-01")
 RETURN s.name, s.geburtsdatum, t.name;
 ```
+![find](find.png)
+
 
 ---
 
@@ -72,12 +75,16 @@ RETURN s.name, s.geburtsdatum, t.name;
 MATCH (s:Spieler {spieler_id: 101})
 DELETE s;
 ```
+![delete](delete.png)
+
 
 ## Spieler mit DETACH DELETE löschen (empfohlen)
 ```
 MATCH (s:Spieler {spieler_id: 101})
 DETACH DELETE s;
 ```
+![detach](detach.png)
+
 
 ---
 
@@ -89,6 +96,8 @@ MATCH (t:Team {name: "New York Yankees"})
 SET t.name = "New York Legends"
 RETURN t;
 ```
+![update1](update1.png)
+
 
 ## Spieler-Position aktualisieren und neue Eigenschaft hinzufügen
 ```
@@ -96,6 +105,8 @@ MATCH (s:Spieler {name: "Aaron Judge"})
 SET s.position = "First Baseman", s.nationalität = "USA"
 RETURN s;
 ```
+![update1](update2.png)
+
 
 ## Trainer eines Teams ersetzen
 ```
@@ -105,6 +116,8 @@ DELETE oldTrainer
 CREATE (newTrainer)-[:TRAINIERT]->(t)
 RETURN t, newTrainer;
 ```
+![update1](update3.png)
+
 ---
 # E Zusätzliche Klauseln (20%)
 ## Merge
