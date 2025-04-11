@@ -1,0 +1,8 @@
+# A) Daten hinzufügen (25%)
+![insert](insert.png)
+# B) Daten abfragen (25%)
+![select](select.png)
+# C) Daten löschen (25%)
+![delete](delete.png)
+# D) Daten verändern (25%)
+![update](update.png)
