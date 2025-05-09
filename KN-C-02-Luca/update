@@ -1,0 +1,17 @@
+-- Anwendungsfall: Ein Fehler im Geburtsdatum des Spielers wurde korrigiert.
+UPDATE spieler_by_team
+SET geburtsdatum = '1992-04-27'
+WHERE team_id = 985e9a26-a409-41ac-94e7-66e3f876d6bb -- Team A ID
+    AND spieler_id = 234e5678-f90b-23d4-b567-528725570111;
+-- Beispiel Spieler-ID
+-- Anwendungsfall: Der Trainer hat seinen Namen geändert oder wurde neu eingestellt.
+UPDATE trainer_by_team
+SET trainer_name = 'Joe Girardi'
+WHERE team_id = 985e9a26-a409-41ac-94e7-66e3f876d6bb;
+-- Team A ID
+-- 3. Anwendungsfall: Ein Spieler hat die Position gewechselt.
+UPDATE spieler_by_team
+SET position = 'First Baseman'
+WHERE team_id = 985e9a26-a409-41ac-94e7-66e3f876d6bb -- Team A ID
+    AND spieler_id = 234e5678-f90b-23d4-b567-528725570111;
+-- Beispiel Spieler-ID
